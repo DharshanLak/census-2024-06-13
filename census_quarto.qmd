@@ -3,3 +3,35 @@ title: "mass-census"
 author: "Dharshan Lakshmikanthan"
 format: html
 ---
+
+```{r}
+#| message: false
+
+library(tidyverse)
+```
+
+```{r}
+x <- read_csv("mass-tracts.csv", show_col_types = FALSE)
+```
+
+```{r}
+x |>
+  ggplot(aes(x = med_income, color = race, fill = race)) +
+  geom_density(alpha = 0.5, adjust = 2) +
+  scale_x_continuous(limits = c(0, 250000), labels = scales::dollar) +
+  labs(
+    title = "Median Income for Massachusetts Census Tracts",
+    subtitle = "The richest tracts are White",
+    x = "Median Income",
+    y = NULL,
+    color = "Race",
+    fill = "Race",
+    caption = "The race of each tract is determined by the most numerous racial group present in that tract. Data from the American Community Survey 2022."
+  ) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+
+
